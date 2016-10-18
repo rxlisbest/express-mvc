@@ -2,6 +2,7 @@ var express = require('express');
 var expressControllers = require('express-controller');
 var app = express();
 var router = express.Router();
+var ejs = require('ejs');
 
 // 全局变量
 root = __dirname; // 根目录
@@ -20,6 +21,10 @@ expressControllers
     .setDirectory( __dirname + '/application/controllers')
     .bind(router);
 
+// 视图配置
+app.engine('html', ejs.__express);
+app.set('views', __dirname + '/application/views');
+app.set('view engine', 'html');
 
 var server = app.listen(3000, function () {
     var host = server.address().address;
